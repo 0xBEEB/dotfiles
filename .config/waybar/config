@@ -1,0 +1,74 @@
+{
+    "layer": "top",
+    "position": "top",
+    "height": 24,
+    "modules-left": ["sway/workspaces", "sway/window"],
+    "modules-center": ["clock", "custom/weather"],
+    "modules-right": ["tray", "custom/scratchpad", "idle_inhibitor", "pulseaudio", "network", "battery"],
+    "sway/workspaces": {
+        "disable-scroll": true,
+        "disable-click": true,
+    },
+    "tray": {
+        "spacing": 10,
+    },
+    "clock": {
+        "format": "{:%a %b %d  %I:%M %p}"
+    },
+    "custom/weather": {
+        "format": "{}",
+        "exec": "curl \"wttr.in/pdx?format=%c%t\" | tr '+' ' '",
+        "interval": 600,
+    },
+    "custom/scratchpad": {
+        "interval": 3,
+        "exec": "/home/briar/bin/scratchcount.sh",
+        "format": "{}",
+        "on-click": "/home/briar/bin/scratchmenu.sh",
+        "on-click-right": "swaymsg 'move scratchpad'"
+    },
+    "cpu": {
+        "format": " {usage}%"
+    },
+    "memory": {
+        "format": " {}%"
+    },
+    "temperature": {
+        "critical-threshold": 75,
+        "format": " {temperatureC}°C"
+    },
+    "idle_inhibitor": {
+        "format": "{icon}",
+        "format-icons": {
+            "activated": "",
+            "deactivated": ""
+        }
+    },
+    "battery": {
+        "bat": "BAT0",
+        "full-at": 95,
+        "states": {
+            "good": 95,
+            "warning": 30,
+            "critical": 15
+        },
+        "format": "{icon}",
+        "format-icons": ["", "", "", "", ""]
+    },
+    "network": {
+        "format-ethernet": "",
+        "format-wifi": " ",
+        "format-disconnected": "⚠",
+        "on-click": "alacritty --class nmtui -e nmtui-connect"
+    },
+    "pulseaudio": {
+        "format": "{icon}",
+        "format-muted": "",
+        "format-icons": {
+            "headphones": "",
+            "default": ["", ""]
+        },
+        "on-click": "alacritty --class pulsemixer -e pulsemixer"
+    },
+}
+
