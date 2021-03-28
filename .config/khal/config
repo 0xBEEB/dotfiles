@@ -1,0 +1,29 @@
+[calendars]
+
+[[home]]
+path= ~/.calendars/Y2FsOi8vMC8zMQ
+color= light cyan
+priority= 20
+
+[default]
+default_calendar= home
+highlight_event_days= True
+show_all_days= False
+timedelta= 5d
+
+[highlight_days]
+color= light cyan
+default_color= light cyan
+
+[locale]
+local_timezone= America/Los_Angeles
+default_timezone= America/Los_Angeles
+timeformat= %H:%M
+dateformat= %m/%d
+longdateformat= %m/%d/%Y
+datetimeformat= %m/%d %H:%M
+longdatetimeformat= %m/%d/%Y %H:%M
+unicode_symbols= True
+
+[view]
+theme= dark

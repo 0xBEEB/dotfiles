@@ -1,0 +1,18 @@
+#!/bin/bash
+
+PKGS=$(pacman -Qdtq) 
+
+if [ -z $PKGS ]; then
+    echo "Nothing to remove"
+    exit 0
+fi
+
+if [[ $EUID != 0 ]]; then
+    sudo -k
+    if sudo false; then
+        echo "Incorrect Password"
+        exit 1
+    fi
+fi
+
+pacman -Qdtq | sudo pacman -Rs -

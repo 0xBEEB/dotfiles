@@ -1,0 +1,32 @@
+# vim: filetype=muttrc
+unmailboxes *
+
+# in/out mail servers
+# check ~/.my-pwd.gpg.example for more info about $my_mailbox_pass
+set realname = "Briar Rose Schreiber"
+set imap_pass = $my_mailbox_pass
+set smtp_url = "smtps://briarrose@mailbox.org@smtp.mailbox.org:465"
+set smtp_pass = $my_mailbox_pass
+set folder = "imaps://briarrose@mailbox.org@imap.mailbox.org:993"
+set ssl_starttls = yes
+set ssl_force_tls = yes
+set spoolfile = "+INBOX"
+
+mailboxes $spoolfile
+
+set from = "briarrose@mailbox.org"
+set envelope_from
+set use_from = "yes"
+set record = "+Sent"
+set trash = "+Trash"
+set postponed = "+Drafts"
+set mail_check = 6
+
+# Allow Mutt to open a new IMAP connection automatically
+unset imap_passive
+
+# Keep the IMAP connection alive by polling intermittently (in sec)
+set imap_keepalive = 300
+
+## Hook -- IMPORTANT!
+account-hook $folder "set imap_pass=$my_mailbox_pass"

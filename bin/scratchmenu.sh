@@ -24,6 +24,7 @@ if [ $WINCOUNT -eq "1" ]; then
     swaymsg scratchpad show
 elif [ $WINCOUNT -gt "1" ]; then
     RESP=$(echo -e "$WINDOWS" | wofi -d)
+    echo $RESP
     swaymsg [title="^$RESP$"] focus
 else
     echo "No scratchpad"

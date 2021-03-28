@@ -6,3 +6,5 @@ allow_markup=true
 term=alacritty
 image_size=20
 prompt=Search
+insensitive=true
+no_actions=true

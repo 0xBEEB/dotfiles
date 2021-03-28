@@ -1,0 +1,21 @@
+max-visible=3
+sort=-time
+layer=top
+anchor=top-right
+font=Ubuntu 10
+background-color=#282828cc
+text-color=#fbf1c7cc
+width=400
+height=100
+margin=10
+padding=5
+border-size=1
+border-color=#fbf1c7cc
+border-radius=0
+progress-color=#fbf1c7cc
+icons=1
+max-icon-size=64
+markup=1
+actions=1
+default-timeout=5000
+

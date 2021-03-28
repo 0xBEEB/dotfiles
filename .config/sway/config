@@ -1,93 +1,160 @@
 # PolymerWitch's Sway Config
 
 
-### Variables
 #
-# Logo key. Use Mod1 for Alt.
-set $mod Mod4
-# Home row direction keys, like vim
-set $left h
-set $down j
-set $up k
-set $right l
-# Your preferred terminal emulator
-set $term alacritty
-# Your preferred application launcher
-# Note: pass the final command to swaymsg so that the resulting window can be opened
-# on the original workspace that the command was run on.
-#set $menu dmenu_path | dmenu | xargs swaymsg exec --
-set $menu wofi
+# Variables
+#
+    # $mod == Super
+    set $mod Mod4
+    
+    # $mod1 == Alt
+    set $mod1 Mod1
+    
+    # Sway script directory
+    set $scripts ~/bin
+    
+    # Home row direction keys, like vim
+    set $left h
+    set $down j
+    set $up k
+    set $right l
+    
+    # Wallpaper
+    set $wallpaper ~/.config/sway/wallpaper.jpg
+    
+    # Your preferred terminal emulator
+    set $term alacritty
+    
+    # Your preferred application launcher
+    # Note: pass the final command to swaymsg so that the resulting window can be opened
+    # on the original workspace that the command was run on.
+    set $menu wofi | xargs swaymsg exec --
+    
+    # Exit menu
+    set $exit_menu $scripts/powermenu.sh
 
-### Output configuration
-#
-# Default wallpaper (more resolutions are available in /usr/share/backgrounds/sway/)
-output * bg /home/briar/Pictures/gibson1.jpg fill
-#
-# Example configuration:
-#
-#   output HDMI-A-1 resolution 1920x1080 position 1920,0
-#
-# You can get the names of your outputs by running: swaymsg -t get_outputs
-output Virtual-1 resolution 1024x768 position 1024,0
 
-# Default window settings
-for_window [app_id="nmtui"] floating enable
-for_window [app_id="pulsemixer"] floating enable, resize set height 100
+#
+# Output configuration
+#
+    # You can get the names of your outputs by running: swaymsg -t get_outputs
+    set $laptopscreen LVDS-1
+    
+    # Configure output
+    output $laptopscreen resolution 1600x900 position 0,0
+    
+    # Set wallpaper on all outputs with fill
+    output * bg $wallpaper fill
 
-### Idle configuration
-#
-# Example configuration:
-#
-# exec swayidle -w \
-#          timeout 300 'swaylock -f -c 000000' \
-#          timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-#          before-sleep 'swaylock -f -c 000000'
-#
-# This will lock your screen after 300 seconds of inactivity, then turn off
-# your displays after another 300 seconds, and turn your screens back on when
-# resumed. It will also lock your screen before your computer goes to sleep.
-exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
-         timeout 600 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c 000000'
 
-### Input configuration
 #
-# Example configuration:
+# Input configuration
 #
-#   input "2:14:SynPS/2_Synaptics_TouchPad" {
-#       dwt enabled
-#       tap enabled
-#       natural_scroll enabled
-#       middle_emulation enabled
-#   }
+    # You can get the names of your inputs by running: swaymsg -t get_inputs
+    # Read `man 5 sway-input` for more information about this section.
+    input "2:7:SynPS/2_Synaptics_TouchPad" {
+        dwt enabled
+        tap disabled
+        drag disabled
+        natural_scroll enabled
+        scroll_factor 0.6
+        accel_profile adaptive
+        middle_emulation disabled
+    }
+
+
 #
-# You can get the names of your inputs by running: swaymsg -t get_inputs
-# Read `man 5 sway-input` for more information about this section.
+# Idle configuration
+#
+    # This will lock your screen after 300 seconds of inactivity, then turn off
+    # your displays after another 60 seconds, and turn your screens back on when
+    # resumed. It will also lock your screen before your computer goes to sleep.
+    exec swayidle -w \
+             timeout 300 'swaylock -f -i $wallpaper' \
+             timeout 360 'swaymsg "output * dpms off"' resume 'swaymsg "output * dpms on"' \
+             before-sleep 'swaylock -f -i $wallpaper'
+
 
 ### Theme
-# Color scheme
-set $color_normal_white  #a89984
-set $color_bright_white  #ebdbb2
-set $color_light_gray    #707070
-set $color_normal_gray   #222222
-set $color_bright_gray   #3c3836
-set $color_bright_blue   #6cb0f5
-set $color_bright_yellow #d79921
-set $color_normal_black  #282828
-set $color_unused        #ff0000
+# A Gruvbox inspired theme
 
-# Colors                border               background           text                indicator          child_border
-client.focused          $color_normal_white  $color_bright_gray   $color_bright_white $color_bright_gray $color_normal_white
-client.focused_inactive	$color_bright_gray   $color_bright_gray   $color_bright_white $color_bright_gray $color_bright_gray
-client.unfocused        $color_normal_gray   $color_normal_gray   $color_normal_white $color_normal_gray $color_bright_gray
-client.urgent           $color_bright_yellow $color_bright_yellow $color_normal_black $color_unused      $color_unused
-client.placeholder      $color_unused        $color_unused        $color_unused       $color_unused      $color_unused
+    # Font
+    font pango:Ubuntu Medium 10
 
-### Key bindings
+    # Color scheme
+    set $color_normal_white  #fbf1c7
+    set $color_bright_white  #f9f5d7
+    set $color_trans_white   #fbf1c7cc
+    set $color_light_gray    #3c3836
+    set $color_trans_gray    #3c3836cc
+    set $color_normal_gray   #7c6f64
+    set $color_bright_gray   #928374
+    set $color_bright_blue   #83a598
+    set $color_bright_yellow #fabd2f
+    set $color_bright_red    #fb4934
+    set $color_trans_green   #b8bb26cc
+    set $color_bright_green  #b8bb26
+    set $color_bright_purple #d3869b
+    set $color_bright_orange #fe8019
+    set $color_bright_aqua   #8ec07c
+    set $color_normal_black  #282828
+    set $color_trans_black   #282828cc
+    set $color_unused        #d65d0e
+    
+    # Colors                border               background           text                indicator           child_border
+    client.focused          $color_normal_gray   $color_normal_gray   $color_bright_white $color_bright_gray  $color_trans_white
+    client.focused_inactive	$color_light_gray    $color_light_gray    $color_bright_white $color_light_gray   $color_trans_gray
+    client.unfocused        $color_light_gray    $color_light_gray    $color_normal_white $color_light_gray   $color_trans_gray
+    client.urgent           $color_bright_yellow $color_bright_yellow $color_normal_black $color_unused       $color_unused
+    client.placeholder      $color_unused        $color_unused        $color_unused       $color_unused       $color_unused
+    
+    # Set gnome theme
+    set $gnome-schema org.gnome.desktop.interface
+    
+    exec_always {
+        gsettings set $gnome-schema gtk-theme 'Klaus'
+        #gsettings set $gnome-schema icon-theme 'Adwaita'
+        gsettings set $gnome-schema icon-theme 'Gruvbox'
+        #gsettings set $gnome-schema cursor-theme 'OpenZone_Black'
+        gsettings set $gnome-schema font-name 'Ubuntu 10'
+        gsettings set $gnome-schema scaling-factor 1.0
+    }
+
+
 #
-# Basics:
+# Status Bar:
 #
+    # Use waybar. Configured in ~/.config/waybar/
+    bar {
+        swaybar_command waybar
+    }
+
+#
+# Settings
+#
+    # Gaps
+    smart_gaps on
+    # gaps inner 5
+    
+    # Borders
+    default_border pixel 2
+    default_floating_border pixel 2
+    smart_borders on
+    hide_edge_borders none
+    
+    # Mouse
+    mouse_warping none
+    focus_follows_mouse no
+
+
+
+#
+# Key bindings
+#
+    # Use the comman wev to detect bind names for keys.
+    #
+    # Basics:
+
     # Start a terminal
     bindsym $mod+Return exec $term
 
@@ -108,19 +175,46 @@ client.placeholder      $color_unused        $color_unused        $color_unused 
     bindsym $mod+Shift+c reload
 
     # Exit sway (logs you out of your Wayland session)
-    bindsym $mod+Shift+e exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
+	bindsym $mod+Shift+e exec $exit_menu
 
     # Lock Screen
-    bindsym $mod+Shift+Delete exec swaylock -f -c 000000
+    bindsym $mod+Shift+Delete exec swaylock -f -i $wallpaper
 
     # Show scratchpad windows
-    bindsym $mod+Shift+n exec /home/briar/bin/scratchmenu.sh
+    # Displays a wofi menu listing scratchpad windows if > 1, shows SP win == 1, or nothing if none
+    bindsym $mod+Shift+n exec $scripts/scratchmenu.sh
 
     # Special Keys
-    bindsym XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
-    bindsym XF86AudioLowerVolume exec pactl set-sink-volume @DEAULT_SINK@ -5%
-    bindsym XF86AudioMute exec pactl set-sink-mute @DEFAULT_SOURCE@ toggle
-    bindsym XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+    bindsym --locked XF86AudioRaiseVolume exec pactl set-sink-volume @DEFAULT_SINK@ +5%
+    bindsym --locked XF86AudioLowerVolume exec pactl set-sink-volume @DEFAULT_SINK@ -5%
+    bindsym --locked XF86AudioMute exec pactl set-sink-mute @DEFAULT_SINK@ toggle
+    bindsym --locked XF86AudioMicMute exec pactl set-source-mute @DEFAULT_SOURCE@ toggle
+    bindsym XF86Launch1 exec $term --class=htop -e htop
+    bindsym --locked XF86MonBrightnessUp exec light -T 1.4
+    bindsym --locked XF86MonBrightnessDown exec light -T 0.72
+    bindsym --locked XF86AudioPrev exec playerctl prev
+    bindsym --locked XF86AudioNext exec playerctl next
+    bindsym --locked XF86AudioPlay exec playerctl play-pause
+    #bindsym XF86ScreenSaver exec swaylock -f -i $wallpaper # wev shows the key, but Sway doesn't catch it :(
+    # XF86WebCam
+    # XF86Display
+
+
+#
+# Default window settings
+#
+    for_window [app_id="^nmtui$"] floating enable
+    for_window [app_id="^wttr$"] floating enable, resize set 65 ppt 80 ppt
+    for_window [app_id="^calview"] floating enable
+    for_window [class="^feh$"] floating enable
+    for_window [app_id="^calc$"] floating enable, resize set 30 ppt 50 ppt
+    for_window [app_id="^pulsemixer$"] floating enable, resize set height 100
+    for_window [app_id="^htop$"] floating enable, resize set 50 ppt 70 ppt
+    for_window [app_id="^org.keepassxc.KeePassXC$"] floating enable
+    for_window [app_id="^vlc$"] floating enable
+    for_window [class="^vlc$"] floating enable
+    for_window [class="^Vlc$"] floating enable
+
 
 #
 # Moving around:
@@ -146,6 +240,8 @@ client.placeholder      $color_unused        $color_unused        $color_unused 
     bindsym $mod+Shift+Down move down
     bindsym $mod+Shift+Up move up
     bindsym $mod+Shift+Right move right
+
+
 #
 # Workspaces:
 #
@@ -173,6 +269,8 @@ client.placeholder      $color_unused        $color_unused        $color_unused 
     bindsym $mod+Shift+0 move container to workspace number 10
     # Note: workspaces can have any name you want, not just numbers.
     # We just use 1-10 as the default.
+
+
 #
 # Layout stuff:
 #
@@ -186,6 +284,7 @@ client.placeholder      $color_unused        $color_unused        $color_unused 
     bindsym $mod+s layout stacking
     bindsym $mod+w layout tabbed
     bindsym $mod+e layout toggle split
+    bindsym $mod+Tab layout toggle all
 
     # Make the current focus fullscreen
     bindsym $mod+f fullscreen
@@ -199,7 +298,41 @@ client.placeholder      $color_unused        $color_unused        $color_unused 
     # Move focus to the parent container
     bindsym $mod+a focus parent
 
-    # Read one character and mark the current window with it
+    # Move focus to the child container
+    bindsym $mod+Shift+a focus child
+
+
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+Minus move scratchpad
+    bindsym $mod+Minus scratchpad show
+
+
+#
+# Screenshots
+#
+    # to clipboard
+    bindsym Print exec grimshot --notify copy
+    # save as
+    bindsym $mod+Print exec grimshot --notify save
+    # region to clipboard
+    bindsym Ctrl+Print exec grimshot --notify copy area
+    # region save as
+    bindsym $mod+Ctrl+Print exec grimshot --notify save area
+
+
+#
+# Marks
+#
+    # Makes Sway marks work similarly to vim marks.
+    # Use mod+m then a character to mark a window. Then use mod+' to return to that window.
+    # Automatically returns you to default mode after a-z is pressed, or esc or return
+
     mode "mark" {
         bindsym a exec swaymsg mark "a" , mode "default"
         bindsym b exec swaymsg mark "b" , mode "default"
@@ -232,7 +365,6 @@ client.placeholder      $color_unused        $color_unused        $color_unused 
     }
     bindsym $mod+m mode "mark"
 
-    # Read on character and goto window with that mark
     mode "goto" {
         bindsym a exec swaymsg '[con_mark="a"] focus' , mode "default"
         bindsym b exec swaymsg '[con_mark="b"] focus' , mode "default"
@@ -263,77 +395,34 @@ client.placeholder      $color_unused        $color_unused        $color_unused 
         bindsym Escape mode "default"
         bindsym Return mode "default"
     }
-    bindsym $mod+g mode "goto"
-#
-# Scratchpad:
-#
-    # Sway has a "scratchpad", which is a bag of holding for windows.
-    # You can send windows there and get them back later.
+    bindsym $mod+apostrophe mode "goto"
 
-    # Move the currently focused window to the scratchpad
-    bindsym $mod+Shift+minus move scratchpad
 
-    # Show the next scratchpad window or hide the focused scratchpad window.
-    # If there are multiple scratchpad windows, this command cycles through them.
-    bindsym $mod+minus scratchpad show
 #
 # Resizing containers:
 #
-mode "resize" {
-    # left will shrink the containers width
-    # right will grow the containers width
-    # up will shrink the containers height
-    # down will grow the containers height
-    bindsym $left resize shrink width 10px
-    bindsym $down resize grow height 10px
-    bindsym $up resize shrink height 10px
-    bindsym $right resize grow width 10px
+    mode "resize" {
+        # left will shrink the containers width
+        # right will grow the containers width
+        # up will shrink the containers height
+        # down will grow the containers height
+        bindsym $left resize shrink width 10px
+        bindsym $down resize grow height 10px
+        bindsym $up resize shrink height 10px
+        bindsym $right resize grow width 10px
+    
+        # Ditto, with arrow keys
+        bindsym Left resize shrink width 10px
+        bindsym Down resize grow height 10px
+        bindsym Up resize shrink height 10px
+        bindsym Right resize grow width 10px
+    
+        # Return to default mode
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
+    }
+    bindsym $mod+r mode "resize"
 
-    # Ditto, with arrow keys
-    bindsym Left resize shrink width 10px
-    bindsym Down resize grow height 10px
-    bindsym Up resize shrink height 10px
-    bindsym Right resize grow width 10px
 
-    # Return to default mode
-    bindsym Return mode "default"
-    bindsym Escape mode "default"
-}
-bindsym $mod+r mode "resize"
-
-# Fuzzy find all files
-bindsym $mod+i exec find /home/briar -type f | wofi -d | xargs xdg-open
-
-#
-# Status Bar:
-#
-# Read `man 5 sway-bar` for more information about this section.
-bar {
-    swaybar_command waybar
-    # position top
-
-    # # When the status_command prints a new line to stdout, swaybar updates.
-    # # The default just shows the current date and time.
-    # status_command while date +'%Y-%m-%d %l:%M:%S %p'; do sleep 1; done
-
-    # colors {
-    #     statusline #ffffff
-    #     background #323232
-    #     inactive_workspace #32323200 #32323200 #5c5c5c
-    # }
-}
-
-gaps inner 5
-smart_gaps on
-
-default_border pixel 3
-default_floating_border none
-hide_edge_borders --i3 none
-smart_borders on
-#hide_edge_borders both
-
-# No mouse jumping
-#mouse_warping none
-#focus_follows_mouse no
-
+# Load System includes
 include /etc/sway/config.d/*

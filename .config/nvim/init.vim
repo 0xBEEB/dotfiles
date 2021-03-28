@@ -22,6 +22,10 @@ function! LightlineFilename()
 	return expand('%t') !=# '' ? @% : '[No Name]'
 endfunction
 
+" Install Plugged before using, and then run :PlugInstall
+" sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+"       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+
 " Plugins
 call plug#begin()
     Plug 'neoclide/coc.nvim', {'branch': 'release'}
@@ -105,6 +109,8 @@ map <C-l> <C-W>l
 inoremap <expr> <Tab> pumvisible() ? "\<C-n>" : "\<Tab>"
 inoremap <expr> <S-Tab> pumvisible() ? "\<C-p>" : "\<S-Tab>"
 inoremap <expr> <cr> pumvisible() ? "\<C-Y>" : "\<cr>"
+
+nnoremap <silent> <Esc><Esc> :let @/=""<CR>
 
 noremap <silent> K :call <SID>show_documentation()<cr>
 

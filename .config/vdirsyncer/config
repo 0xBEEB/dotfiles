@@ -1,0 +1,19 @@
+[general]
+status_path = "~/.config/vdirsyncer/status/"
+
+[pair my_calendar]
+a = "my_calendar_local"
+b = "my_calendar_remote"
+collections = ["from a", "from b"]
+conflict_resolution = ["command", "vimdiff"]
+
+[storage my_calendar_local]
+type = "filesystem"
+path = "~/.calendars/"
+fileext = ".ics"
+
+[storage my_calendar_remote]
+type = "caldav"
+url = "https://dav.mailbox.org/caldav/"
+username = "briarrose@mailbox.org"
+password.fetch = ["command", "~/bin/fetch-mailbox-password.sh"]

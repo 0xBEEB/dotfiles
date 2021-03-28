@@ -1,0 +1,12 @@
+# This file is a list of passwords to be encrypted for config files.
+# 
+# All passwords should be in the form 'set my_varname=password'.
+# Ensure the name starts with 'my_' so they can be set in Mutt.
+# Save this file in /tmp, and then encrypt it:
+# Then encrypt this file, setting yourself as the recipient and
+# move it into an accessible location.
+# 
+# For this config it is ~/.my-pwds.gpg
+#
+
+set my_mailbox_pass=PasswordGoesHere

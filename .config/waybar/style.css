@@ -1,19 +1,18 @@
 * {
     border: none;
     border-radius: 0;
-    font-family: "Ubuntu Nerd Font";
+    font-family: "Ubuntu", "Font Awesome 5 Free", "Font Awesome 5 Brands";
     font-size: 13px;
     min-height: 0;
 }
 
 window#waybar {
-    background-color: rgba(40,40,40,0.8);
-    color: rgba(235,219,178,0.8);
-    border-bottom: 2px solid rgba(0,0,0,0.1);
+    background-color: rgba(40,40,40,0.7);
+    color: rgba(251,241,199,1.0);
+    /* border-bottom: 2px solid rgba(40,40,40,0.4); */
 }
 
 #window {
-    font-family: "Ubuntu";
     margin-top: 5px;
 }
 
@@ -26,13 +25,13 @@ window#waybar {
 #workspaces button {
     padding: 0 5px;
     background: transparent;
-    color: rgba(235,219,178,0.8);
+    color: rgba(251,241,199,1.0);
     border-top: 2px solid transparent;
 }
 
 #workspaces button.focused {
-    color: rgba(235,219,178,0.8);
-    border-top: 2px solid rgba(235,219,175,0.8);
+    color: rgba(249,245,215,1.0);
+    border-top: 2px solid rgba(249,245,215,1.0);
 }
 
 #window {
@@ -48,25 +47,28 @@ window#waybar {
 }
 
 #temperature.critical {
-    color: red;
+    color: rgba(204,36,29,1.0);
 }
 
 #battery icon {
-    color: red;
+    color: rgba(249,245,215,1.0);
 }
 
 #battery.charging {
+    color: rgba(152,151,26,1.0);
+}
+
+#battery.warning:not(.charging) {
+    color: rgba(215,153,33,1.0);
 }
 
 @keyframes blink {
     to {
-        background-color: #ffffff;
-        color: black;
+        color: rgba(204,36,29,1.0);
     }
 }
 
-#battery.warning:not(.charging) {
-    color: white;
+#battery.critical:not(.charging) {
     animation-name: blink;
     animation-duration: 0.5s;
     animation-timing-function: linear;
@@ -75,6 +77,6 @@ window#waybar {
 }
 
 #network.disconnected {
-    background: #f53c3c;
+    color: rgba(204,36,29,1.0);
 }
 

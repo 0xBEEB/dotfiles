@@ -7,25 +7,29 @@
     "modules-right": ["tray", "custom/scratchpad", "idle_inhibitor", "pulseaudio", "network", "battery"],
     "sway/workspaces": {
         "disable-scroll": true,
-        "disable-click": true,
+        "disable-click": false,
     },
     "tray": {
         "spacing": 10,
     },
     "clock": {
-        "format": "{:%a %b %d  %I:%M %p}"
+        "format": "{:%a %b %d  %I:%M %p}",
+        "on-click": "alacritty --class calview -e ~/bin/calview.sh"
     },
     "custom/weather": {
         "format": "{}",
-        "exec": "curl \"wttr.in/pdx?format=%c%t\" | tr '+' ' '",
+        "exec": "/home/briar/bin/weather-bar.zsh",
+        "return-type": "json",
         "interval": 600,
+        "on-click": "alacritty --class wttr -e ~/bin/wttr.sh"
     },
     "custom/scratchpad": {
         "interval": 3,
-        "exec": "/home/briar/bin/scratchcount.sh",
+        "exec": "~/bin/scratchcount.sh",
         "format": "{}",
-        "on-click": "/home/briar/bin/scratchmenu.sh",
-        "on-click-right": "swaymsg 'move scratchpad'"
+        "on-click": "~/bin/scratchmenu.sh",
+        "on-click-right": "swaymsg 'move scratchpad'",
+        "tooltip-format": "Scratchpad"
     },
     "cpu": {
         "format": " {usage}%"
@@ -53,13 +57,16 @@
             "critical": 15
         },
         "format": "{icon}",
-        "format-icons": ["", "", "", "", ""]
+        "format-icons": ["", "", "", "", ""],
+        "on-click": "~/bin/powermenu.sh",
+        "tooltip-format": "{capacity}%"
     },
     "network": {
         "format-ethernet": "",
         "format-wifi": " ",
         "format-disconnected": "⚠",
-        "on-click": "alacritty --class nmtui -e nmtui-connect"
+        "on-click": "alacritty --class nmtui -e nmtui-connect",
+        "tooltip-format": "{essid} ({signalStrength}%)"
     },
     "pulseaudio": {
         "format": "{icon}",
@@ -68,7 +75,8 @@
             "headphones": "",
             "default": ["", ""]
         },
-        "on-click": "alacritty --class pulsemixer -e pulsemixer"
+        "on-click": "alacritty --class pulsemixer -e pulsemixer",
+        "format-source": "{volume}%"
     },
 }
 
